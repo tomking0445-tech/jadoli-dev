@@ -1,5 +1,5 @@
 FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY index.html /usr/share/nginx/html/
+COPY index.html i18n.js /usr/share/nginx/html/
 COPY img /usr/share/nginx/html/img
 EXPOSE 8080
