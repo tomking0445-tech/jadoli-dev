@@ -135,7 +135,7 @@ html[lang=ja] body,html[lang=zh] body{word-break:normal;line-break:strict}
 <script src="i18n.js"></script>
 <script>
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const order=["mc","bot","web","auto"];
+const order=["mc","auto","web","bot"];
 const dlg=document.getElementById("detail"),box=document.getElementById("dlg");
 let d;
 function pick(){const q=new URLSearchParams(location.search).get("lang");if(T[q])return q;try{const s=localStorage.getItem("lang");if(T[s])return s;}catch(e){}const n=(navigator.language||"").slice(0,2);return T[n]?n:"en";}
