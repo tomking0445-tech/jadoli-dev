@@ -79,7 +79,8 @@ dialog::backdrop{background:#1d242099}
 .dlg ul{padding-left:20px;color:var(--soft);font-size:15px}
 .dlg img{border-radius:4px;margin:16px 0 0}
 .kind{display:inline-block;font-style:normal;font-size:12px;font-weight:600;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:2px 9px;margin-left:8px;vertical-align:middle}
-.kind.client{color:var(--grass-dark);border-color:var(--grass-dark);background:var(--leaf)}
+.kind.live{color:var(--grass-dark);border-color:#b9d6ab}
+.kind.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--grass);margin-right:5px;vertical-align:1px}
 .row .kind{margin-left:6px}
 .dlg h2+.kind{margin:6px 0 0}
 .story{margin:22px 0;padding:18px 20px;background:var(--leaf);border-radius:10px}
@@ -150,7 +151,7 @@ const dlg=document.getElementById("detail"),box=document.getElementById("dlg");
 let d;
 function pick(){const q=new URLSearchParams(location.search).get("lang");if(T[q])return q;try{const s=localStorage.getItem("lang");if(T[s])return s;}catch(e){}const n=(navigator.language||"").slice(0,2);return T[n]?n:"en";}
 function proj(i){const [title,subtitle,status,desc,features,tags,kind,story]=d.p[i];return {...base[i],title,subtitle,status,desc,features,tags,kind,story};}
-const badge=p=>`<em class="kind${p.w?" client":""}">${esc(p.kind)}</em>`;
+const badge=p=>`<em class="kind${p.w||p.live?" live":""}">${esc(p.kind)}</em>`;
 function render(lang){
 d=T[lang];
 document.documentElement.lang=lang;

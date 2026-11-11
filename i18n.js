@@ -1,14 +1,14 @@
 const base=[
-{c:"mc",t:"img/belmore.png",g:["img/belmore-1.png","img/belmore-2.png","img/belmore-3.png"]},
+{c:"mc",t:"img/belmore.png",live:1,g:["img/belmore-1.png","img/belmore-2.png","img/belmore-3.png"]},
 {c:"mc",t:"img/mmcore.png",g:["img/mm-1.png","img/mm-2.png","img/mm-3.png","img/mm-4.png","img/mm-5.png","img/mm-6.png"]},
 {c:"mc",t:"img/tidemarket.png",g:["img/tm-1.png","img/tm-2.png","img/tm-3.png","img/tm-4.png","img/tm-5.png"]},
 {c:"mc",t:"img/minefarm.png"},
 {c:"web",t:"img/wism.png",l:"https://wismentertainment.com",w:1},
 {c:"web",t:"img/calendar.png"},
-{c:"auto",t:"img/ssauto.png",g:["img/ss-1.png","img/ss-2.png","img/ss-3.png","img/ss-4.png"]},
+{c:"auto",t:"img/ssauto.png",live:1,g:["img/ss-1.png","img/ss-2.png","img/ss-3.png","img/ss-4.png"]},
 {c:"auto",t:"img/excel.png"},
 {c:"auto",t:"img/collector.png"},
-{c:"bot",t:"img/discord.png",g:["img/discord.png","img/ticket.png"]},
+{c:"bot",t:"img/discord.png",live:1,g:["img/discord.png","img/ticket.png"]},
 {c:"bot",t:"img/ggumigi.png"},
 {c:"auto",t:"img/backtest.png"}
 ];
