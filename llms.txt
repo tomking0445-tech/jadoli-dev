@@ -1,0 +1,398 @@
+# 자돌이 작업물
+
+마인크래프트 서버랑 디스코드 봇을 주로 만들어요. 쇼핑몰 상품 등록이나 엑셀 같은 반복 업무 자동화도 합니다.
+개발은 8년째, 외주는 5년째 받고 있어요. 최근엔 알비온 온라인 같은 MMORPG를 마인크래프트 안에 혼자 만들어서 테스트 오픈까지 했습니다.
+
+Discord: https://discord.gg/MBmmrEFRuz (erwq_)
+Site: https://tomking0445-tech.github.io/jadoli-dev/?lang=ko
+
+## 마인크래프트
+
+### 벨모어
+[개인 프로젝트, 1인 개발 | 2026.11 테스트 오픈] 알비온 스타일 마인크래프트 MMORPG 서버, NeoForge 자작 모드 1인 개발
+알비온 온라인 스타일의 마인크래프트 MMORPG 서버를 1인으로 기획하고 개발했습니다.
+NeoForge 1.21.1 기반 통합 자작 모드로, 생산과 운송, 무역, 전투가 서로 맞물리는 경제 구조를 만들었습니다.
+- 무기 기반 스킬 전투 (R, F, C 키로 무기, 투구, 갑옷 스킬)
+- T1~T10 장비 티어와 인챈트, 반지 슬롯이 있는 자체 장비창
+- 커스텀 채집 노드와 채집, 정제, 제작 생산 트리
+- 무게 시스템과 탈것별 적재량으로 운송이 콘텐츠가 되는 구조
+- 도시 간 무역품, NPC 매입과 거래소 판매 경제
+- 구글 시트를 수정하면 서버에 밸런스가 자동 반영
+- 공식 런처에 프로필을 등록하는 자체 설치기와 업데이터
+사용 기술: Java, NeoForge, 1인 개발, Google Sheets
+개발 과정과 문제 해결:
+- 개발 규모: Java 소스 파일 133개, 약 19,400줄 (0.6 버전 기준). 0.1부터 0.63까지 테스트 피드백을 받으며 계속 업데이트했습니다.
+- 문제: 테스터에게서 "튜토리얼이 불친절하고 아이템 이름이 다 비슷해서 무엇을 만들어야 할지 못 찾겠다"는 의견을 받았습니다.
+- 해결: 아이템 이름을 "T1 천 갑옷"처럼 티어와 종류가 먼저 보이게 바꾸고, 제작 화면에 검색창과 제작 가능 필터를 넣었습니다. 퀘스트 목표 아이템은 강조해서 맨 앞에 띄우고, 목표 위치까지 화살표로 안내하게 했습니다. 튜토리얼 재료도 줄여 첫 제작에서 막히지 않게 했습니다.
+- 역할: 기획, 시스템 설계, 구현, 테스트를 직접 맡았고 AI 코딩 도구로 개발과 반복 개선 속도를 높였습니다.
+
+### M&M 서버 코어
+[팀 프로젝트, 개발 담당] 모드 75개 환경의 RPG 서버 코어 모드와 내장 웹 관리자 패널
+모드 75개가 들어간 Forge RPG 서버의 중심이 되는 코어 모드입니다.
+경제부터 진영 성장, 퀘스트, 보호 구역까지 서버 운영에 필요한 시스템을 하나로 묶었고, 서버에 웹 관리자 패널을 내장해 브라우저에서 운영할 수 있게 만들었습니다.
+- 지갑, 은행, 수표가 있는 경제 시스템과 동적 가격 상점
+- 플레이어 간 계약 거래
+- 진영 성장 단계와 단계별 콘텐츠 잠금
+- 납품, 처치, 운반 퀘스트와 승급 시험
+- 개인과 팀 보호 구역, 전투 상태 관리
+- 서버 내장 웹 관리자 패널: 경제 통계, 퀘스트 편집, 상점 시세, 월드 규칙, 운영 설정을 브라우저에서 바로 변경
+- 관리자별 계정과 메뉴 단위 권한, 활동 기록
+- 바닐라 화면을 대체하는 자체 UI
+사용 기술: Java, Forge, RPG 서버, 웹 관리자
+
+### TideMarket
+[개인 프로젝트] 수요와 공급에 따라 가격이 움직이는 경제 서버용 상점 플러그인
+같은 아이템을 많이 팔수록 서버 전체의 매입가가 내려가고, 시간이 지나면 원래 가격으로 회복되는 상점 플러그인입니다. 많이 사면 구매가가 올라가고, 서버장은 게임에 접속하지 않아도 브라우저 웹 패널에서 가격을 고치고 거래 기록을 볼 수 있습니다.
+테스트 서버(Paper 1.21.11)에서 밀 3,330개를 판매한 뒤 판매가가 62.2% 내려가는 것을 확인했습니다.
+- /sell 판매 창, 손에 든 아이템, 전체 판매, 셜커 상자 안 아이템 판매
+- 카테고리별 상점 GUI와 현재 구매가, 판매가, 24시간 변동률 표시
+- 등급별 판매 배수 권한과 상점 NPC
+- PlaceholderAPI 연동으로 스코어보드에 실시간 시세 표시
+- 웹 관리 패널: 대시보드, 가격 편집, 시세 그래프, 거래 기록, 직원 계정과 권한, 활동 기록
+- 싸게 사서 되파는 시세 차익을 막도록 구매가와 판매가 배율을 분리
+- 대량 판매도 한 개씩 정확히 계산, DB 저장은 메인 스레드 밖에서 처리
+- Vault로 기존 경제 플러그인과 호환, 지급 실패 시 아이템 반환
+- 웹 패널 보안: 기본 꺼짐, 비밀번호 해시, 로그인 실패 차단, 허용 IP 목록
+- 영어와 한국어 지원 (게임 메시지, 웹 패널)
+사용 기술: Java, Paper, Vault, PlaceholderAPI, 웹 패널
+개발 과정과 문제 해결:
+- 문제: 처음 만든 상점 코드는 구매가와 판매가가 같은 배율을 같이 써서, 시세가 바닥일 때 싸게 사 두고 회복된 뒤 되팔면 돈이 계속 불어났습니다.
+- 해결: 구매가와 판매가 배율을 따로 나누고, 구매가는 기본가 아래로, 판매가는 기본가 위로 못 가게 막았습니다.
+- 문제: 대량 판매 가격을 평균으로 어림해 실제 가격과 차이가 났습니다.
+- 해결: 한 개씩 정확히 더하는 방식으로 바꾸고, 하한가에 닿으면 남은 수량은 한 번에 계산하게 했습니다.
+- 문제: 스코어보드 플러그인이 비동기로 시세를 읽으면 스레드 충돌과 렉이 생길 수 있었습니다.
+- 해결: 시세는 1초마다 메인 스레드에서 미리 계산해 두고, 플레이스홀더는 그 값만 돌려주게 했습니다.
+
+### MineFarmCore
+[개인 프로젝트] 마인팜 경제 서버용 코어 플러그인, 자체 경제와 GUI, NPC 상점
+마인팜 경제 서버를 위한 코어 플러그인입니다.
+외부 경제 플러그인 없이 돌아가는 자체 경제를 넣고, 상점을 중심으로 서버 기능을 확장할 수 있게 설계했습니다.
+- Paper 1.21 기반, Vault 호환 자체 경제
+- GUI 상점과 NPC 상점 동시 지원
+- 서버장이 켜고 끌 수 있는 시세 변동 기능
+- 판타지 RPG 서버 팀 합격 때 실력 증명용으로 쓴 작업물
+사용 기술: Java, Paper, 경제 시스템, Vault 호환
+
+## 자동화와 데이터
+
+### 스마트스토어 상품 자동 등록 프로그램
+[직접 운영 중 | 실운영 중] 도매몰 수집부터 네이버 등록, 동기화, 주문 알림까지 자동으로 도는 단독 실행 프로그램
+도매꾹 Open API로 상품을 모으고, 네이버 커머스API로 스마트스토어에 자동 등록하는 프로그램입니다. 가격과 재고 동기화, 신규 주문 알림까지 사람 손 없이 돌아가고, 실제 스토어에서 운영하며 하루 등록 한도인 약 300개를 자동으로 올렸습니다.
+- 도매꾹 Open API로 키워드나 카테고리별 상품 수집
+- KC 인증, 생활화학제품, 성인용품, 이미지 사용 금지, 이미테이션 상품 자동 제외
+- 상품명과 공급사 분류를 함께 점수화해 네이버 카테고리 5,004개 중 자동 매칭, 확실하지 않으면 등록하지 않음
+- SEO 가공: 상품명 50자 정리, 홍보 문구 제거, 태그 10개, 상품 속성과 검색 설정 자동 입력
+- 등록 오류 자동 복구: 금지 태그, 옵션 특수문자, 이미지 주소 오류를 응답에서 읽어 고친 뒤 재등록
+- 색상이나 길이만 다른 상품은 기존 상품의 옵션으로 병합
+- 가격, 재고, 품절 자동 동기화와 신규 주문 발주확인 메일 발송
+- 배치 파일 한 번으로 버전 증가, exe 빌드, 운영 폴더 배포
+사용 기술: Python, 네이버 커머스API, 도매꾹 Open API, PyInstaller
+개발 과정과 문제 해결:
+- 문제: "세면기 샤워필터"가 이름 끝의 "면기" 때문에 식기 카테고리로 잘못 분류됐습니다.
+- 해결: 두 글자짜리 카테고리 이름은 앞에 다른 단어가 붙은 경우에만 근거로 인정하게 했습니다.
+- 문제: "음료 뚜껑 1박스"의 "박스"를 읽고 화방용품 박스로 분류했습니다.
+- 해결: 숫자가 붙은 수량 표현은 카테고리 판단 근거에서 빼도록 바꿨습니다.
+- 문제: 네이버가 금지 태그를 이유로 등록을 거절하면 같은 실패가 반복됐습니다.
+- 해결: 거절된 단어를 기억해 다음 상품부터 미리 빼서 재시도 횟수를 크게 줄였습니다.
+
+### 엑셀 자동 정리기
+[개인 프로젝트] 형식이 다른 여러 엑셀 파일을 버튼 한 번으로 통합
+형식이 제각각인 엑셀 파일 여러 개를 버튼 한 번으로 하나의 정리된 파일로 합쳐주는 프로그램입니다.
+시연: 파일 4개, 원본 180행에서 빈 행 10개와 중복 10건을 제거해 170건으로 정리.
+- 열 이름이 달라도 자동 인식
+- 제목 줄이 있어도 표 시작 위치 자동 탐지
+- 날짜, 금액, 숫자 형식 통일
+- 빈 행, 중복 데이터 자동 제거와 상품명 표기 통일
+- 월별, 상품별 요약 시트와 처리 리포트 자동 생성
+- 설치 없이 실행되는 프로그램
+사용 기술: Python, pandas, Excel, GUI
+
+### 쇼핑몰 상품 수집 프로그램
+[개인 프로젝트] 링크만 넣으면 상품 정보와 이미지를 폴더별로 자동 정리
+쇼핑몰의 목록이나 상품 링크를 넣으면 공개된 상품 정보와 이미지를 자동으로 모아 정리해 주는 데스크톱 프로그램입니다.
+여러 쇼핑몰을 하나의 프로그램에서 처리할 수 있게 사이트별 구조로 나눠 만들었습니다.
+- 목록 페이지에서 상품 링크 자동 수집 후 순차 처리
+- 상품별 폴더에 상품명, 가격, 대표 이미지, 상세 이미지 저장
+- 상세 이미지를 한 장으로 합친 상세페이지 이미지 생성
+- 엑셀 요약 파일과 결과 리포트 자동 작성
+- 중단 후 다시 실행하면 완료된 상품은 건너뛰는 이어하기
+- 진행률 바와 실시간 로그가 있는 GUI, 설치 없이 실행되는 exe
+- 판매용 기간제 라이선스 구조 설계
+사용 기술: Python, Playwright, GUI, exe 배포
+
+### 시세 데이터 백테스트 프레임워크
+[개인 프로젝트] 과거 시세로 여러 전략을 같은 조건에서 객관적으로 검증
+과거 시세 데이터를 모으고, 여러 매매 전략을 같은 조건에서 비교 검증하는 백테스트 프레임워크를 직접 설계하고 구현했습니다.
+실제 데이터로 검증한 결과 단순 기술적 전략으로는 우위가 없다는 결론을 냈고, 결과를 부풀리지 않는 검증 도구로 정리했습니다.
+- 거래소 API로 과거 시세 데이터 수집과 정리
+- 전략을 갈아끼울 수 있는 구조의 백테스트 엔진
+- 수수료와 슬리피지를 반영한 수익률 계산
+- ccxt 기반이라 다른 거래소로 확장 가능
+사용 기술: Python, pandas, ccxt, 백테스팅
+
+## 홈페이지와 앱
+
+### 위즘 엔터테인먼트 공식 홈페이지
+[고객 의뢰작 | 실서버 운영 중] 엔터테인먼트 회사 공식 홈페이지, 실서버 운영 중
+파티, DJ 이벤트, 쇼케이스, 아티스트 프로모션을 하는 엔터테인먼트 회사의 공식 홈페이지를 기획부터 배포까지 단독으로 제작했습니다.
+- 회사 로고가 크게 보이는 브랜드 중심 메인 화면
+- 소속 아티스트 소개 페이지
+- 아티스트 사진과 정보를 쉽게 교체할 수 있는 구조
+- PC와 모바일 반응형
+- GitHub 코드 관리와 Railway 자동 배포
+- 커스텀 도메인 연결
+사용 기술: HTML, CSS, JavaScript, Railway
+https://wismentertainment.com
+
+### 팀 공유 캘린더 앱
+[팀 내부용] 누가 일정을 바꾸면 팀 전체에 바로 알림이 가는 내부용 캘린더 앱
+4명이 함께 쓰는 팀 일정을 한곳에서 관리하려고 만든 내부용 캘린더 앱입니다.
+누가 일정을 추가하거나 수정, 삭제하면 수정한 사람을 뺀 나머지 팀원 전체에게 바로 푸시 알림이 가도록 만들었습니다.
+- 팀 코드로 새 팀 만들기와 참가
+- Firestore 실시간 동기화로 모든 팀원 화면에 즉시 반영
+- Cloud Functions로 일정 추가, 수정, 삭제 시 팀원 전체 푸시 알림
+- 수정자 판별을 서버에서 처리해 조작 방지
+- 날짜별 일정 달력과 일정 편집 화면
+사용 기술: React Native, Expo, Firebase, 푸시 알림
+
+## 디스코드 봇
+
+### 디스코드 운영 봇 (지원서 접수, 문의 티켓)
+[팀 납품, 직접 운영] 서버 팀의 지원서 접수와 의뢰인 문의 채널을 자동으로 처리하는 봇
+디스코드 서버 운영에서 반복되는 일을 자동으로 처리하는 봇 두 가지입니다.
+마인크래프트 RPG 서버 개발팀에는 부서별 채널 구조와 지원서 접수 봇을 만들어 넘겼고, 외주 접수용 서버에서는 버튼 하나로 의뢰인 전용 문의 채널을 여는 티켓 봇을 Railway에서 24시간 운영 중입니다.
+- 기획, 건축, 개발, 운영, 아트 5개 부서 구조로 채널과 역할 설계
+- 지원서 제출과 관리자 채널 전달, 구인용 홍보 페이지 제작
+- 문의 버튼으로 의뢰인 전용 채널 자동 생성, 본인과 관리자만 보이도록 권한 자동 설정
+- Railway 배포로 24시간 운영, GitHub로 코드를 넘겨 팀에서 직접 업데이트 가능
+사용 기술: Discord, Python, Railway, GitHub
+
+### 꾸미기AI
+[개인 프로젝트] 말로 요청하면 채널과 역할을 알아서 만들어주는 서버 관리 봇
+디스코드 서버를 꾸밀 때 채널과 역할을 하나하나 만드는 대신, 원하는 걸 말로 요청하면 봇이 구성안을 만들어 보여주고 적용까지 해주는 관리 봇입니다.
+예: "역할 12개 만들고 팀별로 같은 계열 색, 팀장은 더 진하게" 한 줄로 역할 구성과 색상, 권한을 한 번에 세팅.
+- 자연어 요청을 채널, 역할, 권한 작업으로 변환
+- 적용 전 변경 내용을 목록으로 보여주고 적용, 취소 버튼으로 확인
+- 역할 색상, 상단 표시, 관리자 권한까지 한 번에 설정
+- 요청한 사람에게만 보이는 메시지로 처리해 서버를 어지럽히지 않음
+사용 기술: Discord, GPT API, Python, 서버 관리
+
+## 이런 걸 맡기실 수 있어요
+아래는 시작 가격이고, 원하시는 걸 들어본 다음 정확한 견적을 드려요.
+- 마인크래프트 | 플러그인, 자작 모드, 경제나 RPG 시스템, 웹 관리자 페이지 | 7일부터 | 5만 원
+- 업무 자동화 | 엑셀 정리, 쇼핑몰 상품 자동 등록, 공식 API 연동, GPT 같은 AI API 연동 | 3일부터 | 7만 원
+- 홈페이지 | 회사 소개 사이트, 카페24 쇼핑몰, 예약이나 회원 기능 | 7일부터 | 15만 원
+- 디스코드 봇 | 지원서 접수, 티켓, 인증, 역할 지급, 마크 서버 연동 | 3일부터 | 5만 원
+
+진행 절차
+1. 문의: 디스코드나 크몽으로 만들고 싶은 걸 알려주세요. 대충만 말씀하셔도 돼요.
+2. 견적: 기능 범위, 가격, 일정을 정리해서 드려요.
+3. 진행: 중간에 한 번 결과를 보여드리고 방향을 맞춰요.
+4. 납품: 완성본과 사용 방법을 함께 드려요.
+
+수정과 사후 관리
+- 기본 수정 2회 포함
+- 납품 후 7일 동안 버그는 무상으로 고쳐드려요
+- 처음 견적에 없던 기능 추가는 따로 견적을 드려요
+- 결제는 크몽 안전결제로 하실 수 있어요
+
+
+---
+
+# Jadoli | Minecraft and Discord Developer
+
+I mostly build Minecraft servers and Discord bots. I also automate repetitive work like store product listing and Excel.
+I have been coding for 8 years and taking commissions for 5. Recently I built an Albion Online style MMORPG inside Minecraft on my own and took it all the way to a test launch.
+
+Discord: https://discord.gg/MBmmrEFRuz (erwq_)
+Site: https://tomking0445-tech.github.io/jadoli-dev/?lang=en
+
+## Minecraft
+
+### Belmore
+[Personal project, solo | Test launch Nov 2026] Albion-style Minecraft MMORPG server, custom NeoForge mod built solo
+I designed and developed an Albion Online style Minecraft MMORPG server on my own.
+It is a single integrated NeoForge 1.21.1 mod with an economy where gathering, transport, trade and combat all depend on each other.
+- Weapon-based skill combat (weapon, helmet and armor skills on R, F and C)
+- T1 to T10 gear tiers with enchantments and a custom equipment screen with ring slots
+- Custom gathering nodes and a gather, refine and craft production tree
+- Weight system and mount carry capacity that turn transport into gameplay
+- Trade goods between cities, NPC buy orders and a player market
+- Balance values edited in Google Sheets are applied to the server automatically
+- Custom installer and updater that registers a profile in the official launcher
+Tech: Java, NeoForge, Solo project, Google Sheets
+Development and problem solving:
+- Scale: 133 Java source files, about 19,400 lines (as of version 0.6). Updated continuously from 0.1 to 0.63 based on tester feedback.
+- Problem: Testers said the tutorial was unfriendly and item names looked so alike that they could not find what to craft.
+- Fix: Renamed items so the tier and type come first, like "T1 Cloth Armor", and added a search box and a craftable only filter to the crafting screen. Quest target items are highlighted at the top, and an arrow guides players to the target location. Tutorial materials were reduced so the first craft never blocks progress.
+- Role: Led planning, system design, implementation and testing, using AI coding tools to speed up development and iteration.
+
+### M&M Server Core
+[Team project, lead developer] RPG server core mod for a 75-mod setup, with a built-in web admin panel
+The core mod at the center of a Forge RPG server running 75 mods.
+It bundles everything the server needs, from the economy to faction progression, quests and protected zones, and includes a web admin panel built into the server so it can be run from a browser.
+- Economy with wallets, a bank and cheques, plus shops with dynamic prices
+- Contract trading between players
+- Faction progression stages that unlock content step by step
+- Delivery, hunting and transport quests with promotion trials
+- Personal and team protected zones, combat state tracking
+- Built-in web admin panel: economy stats, quest editor, shop prices, world rules and server settings, all changeable from a browser
+- Separate admin accounts with per-menu permissions and an activity log
+- Custom UI that replaces vanilla screens
+Tech: Java, Forge, RPG server, Web admin
+
+### TideMarket
+[Personal project] Shop plugin with prices that move with supply and demand
+A shop plugin where selling a lot of one item lowers its price for the whole server, and the price recovers over time. Buying a lot raises the buy price. Server owners can edit prices and check the trade log from a browser without joining the game.
+On a Paper 1.21.11 test server, selling 3,330 wheat dropped its sell price by 62.2%.
+- /sell GUI, sell hand, sell all, and selling items inside shulker boxes
+- Category shop GUI showing current buy and sell prices and the 24h change
+- Rank based sell multipliers and shop NPCs
+- PlaceholderAPI support for live prices on scoreboards
+- Web admin panel: dashboard, price editor, price charts, trade log, staff accounts with permissions, activity log
+- Separate buy and sell multipliers to block buy low, resell high exploits
+- Exact item by item pricing for bulk sales, database writes off the main thread
+- Works with existing economy plugins through Vault, items returned if payment fails
+- Web panel security: off by default, hashed passwords, login lockout, IP allowlist
+- English and Korean for both game messages and the web panel
+Tech: Java, Paper, Vault, PlaceholderAPI, Web panel
+Development and problem solving:
+- Problem: The first shop code used the same multiplier for buy and sell prices, so buying at the bottom and reselling after recovery generated money endlessly.
+- Fix: Split the buy and sell multipliers, and blocked the buy price from going below base and the sell price from going above it.
+- Problem: Bulk sale prices were estimated with an average and drifted from the real total.
+- Fix: Prices are now summed item by item, and once the floor price is reached the rest is calculated in one step.
+- Problem: Scoreboard plugins reading prices asynchronously could cause thread conflicts and lag.
+- Fix: Prices are precomputed on the main thread every second and placeholders only return those values.
+
+### MineFarmCore
+[Personal project] Core plugin for MineFarm economy servers with its own economy, GUIs and NPC shops
+A core plugin for MineFarm style economy servers.
+It runs its own economy without any external economy plugin and is designed so the server can grow around the shop system.
+- Built on Paper 1.21, with a Vault-compatible custom economy
+- Both GUI shops and NPC shops
+- Optional market price changes that server owners can turn on or off
+- Used as proof of skill when I joined a fantasy RPG server team
+Tech: Java, Paper, Economy, Vault compatible
+
+## Automation and data
+
+### Smartstore Auto Listing Program
+[In use on my own store | Running in production] Standalone program that sources wholesale products, lists them on Naver, syncs stock and alerts on orders
+A program that collects products through the Domeggook Open API and lists them on Naver Smartstore through the Naver Commerce API. Price and stock sync and new order alerts run without anyone touching it. Running on a real store, it automatically listed about 300 products a day, the daily listing limit.
+- Collects products by keyword or category through the Domeggook Open API
+- Automatically skips KC certified items, household chemicals, adult products, image restricted and imitation products
+- Scores product names together with supplier categories to match one of Naver's 5,004 categories, and skips the product when unsure
+- SEO processing: 50 character titles, promo phrase removal, 10 tags, product attributes and search settings filled in
+- Automatic error recovery: reads banned tags, option symbols and image URL errors from the API response, fixes them and retries
+- Products that differ only in color or length are merged into an existing product as options
+- Automatic price, stock and sold out sync, plus order confirmation emails for new orders
+- One batch file bumps the version, builds the exe and deploys to the run folder
+Tech: Python, Naver Commerce API, Domeggook Open API, PyInstaller
+Development and problem solving:
+- Problem: A sink shower filter was put in a tableware category because its Korean name ends with a word that matches a dish category.
+- Fix: Two letter category names now count only when they appear as part of a longer word.
+- Problem: "1 box" in a product name was read as a box product and sent to an art supplies category.
+- Fix: Quantity expressions with numbers are no longer used as category evidence.
+- Problem: When Naver rejected a listing for a banned tag, the same failure kept repeating.
+- Fix: Rejected words are remembered and removed from the next products in advance, sharply cutting retries.
+
+### Excel Auto Organizer
+[Personal project] Merges Excel files with different layouts into one with a single click
+A program that merges several Excel files with different layouts into one clean file with a single button.
+Demo: 4 files and 180 source rows, with 10 blank rows and 10 duplicates removed, resulting in 170 clean records.
+- Recognizes columns even when headers are named differently
+- Finds where the table starts even with title rows above it
+- Unifies date, currency and number formats
+- Removes blank rows and duplicates and normalizes product names
+- Generates monthly and per-product summary sheets and a processing report
+- Runs without installation
+Tech: Python, pandas, Excel, GUI
+
+### Online Store Product Collector
+[Personal project] Paste a link and product info and images are sorted into folders automatically
+A desktop program that collects publicly listed product info and images when you paste a store list page or product link, and organizes everything automatically.
+Each store has its own module, so several stores can be handled from one program.
+- Collects product links from list pages and processes them in order
+- Saves name, price, main image and detail images into a folder per product
+- Merges detail images into a single detail page image
+- Writes an Excel summary and a result report automatically
+- Resume support that skips products already finished
+- GUI with a progress bar and live log, shipped as a no-install exe
+- License system designed for time-limited paid use
+Tech: Python, Playwright, GUI, exe
+
+### Market Data Backtesting Framework
+[Personal project] Tests multiple strategies on historical prices under identical conditions
+I designed and built a backtesting framework that collects historical price data and compares trading strategies under the same conditions.
+Testing on real data showed that simple technical strategies have no edge, so I kept it as an honest validation tool that does not inflate results.
+- Collects and cleans historical price data through exchange APIs
+- Backtest engine with swappable strategies
+- Return calculation that includes fees and slippage
+- Built on ccxt, so it extends to other exchanges
+Tech: Python, pandas, ccxt, Backtesting
+
+## Websites and apps
+
+### WISM Entertainment Official Website
+[Client work | Live in production] Official website for an entertainment company, live in production
+I built the official website for an entertainment company that runs parties, DJ events, showcases and artist promotion, handling everything from planning to deployment on my own.
+- Brand-focused main page with the company logo front and center
+- Artist profile pages
+- Structure that makes swapping artist photos and info easy
+- Responsive on desktop and mobile
+- Code managed on GitHub with automatic deploys on Railway
+- Custom domain setup
+Tech: HTML, CSS, JavaScript, Railway
+https://wismentertainment.com
+
+### Team Shared Calendar App
+[Internal team tool] Internal calendar app that notifies the whole team the moment someone changes a schedule
+An internal calendar app built so a team of four could manage shared schedules in one place.
+Whenever someone adds, edits or deletes an event, every other team member gets a push notification right away.
+- Create or join a team with a team code
+- Real-time Firestore sync so changes appear on every screen instantly
+- Cloud Functions send push notifications to the team on add, edit and delete
+- The editor is identified on the server to prevent tampering
+- Calendar view by date and an event editor
+Tech: React Native, Expo, Firebase, Push notifications
+
+## Discord bots
+
+### Discord Operation Bots (Applications, Tickets)
+[Delivered to a team, self operated] Bots that handle team applications and private client inquiry channels automatically
+Two bots that take repetitive work off a Discord server.
+For a Minecraft RPG server team I set up a department based channel structure and an application bot, and on my commission server a ticket bot opens a private inquiry channel with one button, running 24/7 on Railway.
+- Channels and roles designed around 5 departments: planning, building, development, operations and art
+- Application submission forwarded to an admin channel, plus a recruitment promo page
+- Inquiry button creates a private channel visible only to the client and admins
+- Deployed on Railway for 24/7 uptime, code handed over through GitHub so the team can update it
+Tech: Discord, Python, Railway, GitHub
+
+### Ggumigi AI
+[Personal project] Server management bot that builds channels and roles from a plain-language request
+Instead of creating Discord channels and roles one by one, you describe what you want and the bot shows a proposed setup, then applies it.
+Example: one line like "make 12 roles, same color family per team, darker for team leads" sets up roles, colors and permissions at once.
+- Turns natural language requests into channel, role and permission changes
+- Shows a list of changes before applying, with Apply and Cancel buttons
+- Sets role colors, separate display and admin permissions in one go
+- Replies are visible only to the requester, so the server stays clean
+Tech: Discord, GPT API, Python, Server management
+
+## What you can hire me for
+These are starting prices. I will give you an exact quote once I hear what you need.
+- Minecraft | Plugins, custom mods, economy or RPG systems, web admin panels | From 7 days | $20
+- Automation | Excel cleanup, store product auto listing, official API integration, AI API integration such as GPT | From 3 days | $50
+- Websites | Company websites, online stores, booking or member features | From 7 days | $120
+- Discord bots | Applications, tickets, verification, role rewards, Minecraft server linking | From 3 days | $20
+
+How it works
+1. Inquiry: tell me what you want on Discord. A rough idea is fine.
+2. Quote: I send the scope, price and timeline.
+3. Build: I show you the progress once halfway through to stay on track.
+4. Delivery: you get the finished work with usage instructions.
+
+Revisions and support
+- 2 revisions included
+- Free bug fixes for 7 days after delivery
+- Features not in the original quote are quoted separately
+- Payment: 50% upfront, 50% on completion
