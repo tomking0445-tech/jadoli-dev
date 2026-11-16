@@ -181,7 +181,8 @@ https://wismentertainment.com
 아래는 시작 가격이고, 원하시는 걸 들어본 다음 정확한 견적을 드려요.
 - 마인크래프트 | 플러그인, 자작 모드, 경제나 RPG 시스템, 웹 관리자 페이지 | 7일부터 | 5만 원
 - 업무 자동화 | 엑셀 정리, 쇼핑몰 상품 자동 등록, 공식 API 연동, GPT 같은 AI API 연동 | 3일부터 | 7만 원
-- 홈페이지 | 회사 소개 사이트, 카페24 쇼핑몰, 예약이나 회원 기능 | 7일부터 | 15만 원
+- 소개 홈페이지 | 회사 소개, 랜딩 페이지, 카페24 쇼핑몰 | 7일부터 | 15만 원
+- 맞춤 홈페이지 | 회원가입, 예약, 관리자 페이지 포함 자체 개발 (카페24 없이) | 14일부터 | 50만 원
 - 디스코드 봇 | 지원서 접수, 티켓, 인증, 역할 지급, 마크 서버 연동 | 3일부터 | 5만 원
 
 진행 절차
@@ -382,7 +383,8 @@ Tech: Discord, GPT API, Python, Server management
 These are starting prices. I will give you an exact quote once I hear what you need.
 - Minecraft | Plugins, custom mods, economy or RPG systems, web admin panels | From 7 days | $20
 - Automation | Excel cleanup, store product auto listing, official API integration, AI API integration such as GPT | From 3 days | $50
-- Websites | Company websites, online stores, booking or member features | From 7 days | $120
+- Simple websites | Company intro, landing pages, online stores | From 7 days | $120
+- Custom websites | Built from scratch with members, booking and an admin panel | From 14 days | $400
 - Discord bots | Applications, tickets, verification, role rewards, Minecraft server linking | From 3 days | $20
 
 How it works
