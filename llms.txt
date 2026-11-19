@@ -26,19 +26,28 @@ NeoForge 1.21.1 기반 통합 자작 모드로, 생산과 운송, 무역, 전투
 - 해결: 아이템 이름을 "T1 천 갑옷"처럼 티어와 종류가 먼저 보이게 바꾸고, 제작 화면에 검색창과 제작 가능 필터를 넣었습니다. 퀘스트 목표 아이템은 강조해서 맨 앞에 띄우고, 목표 위치까지 화살표로 안내하게 했습니다. 튜토리얼 재료도 줄여 첫 제작에서 막히지 않게 했습니다.
 - 역할: 기획, 시스템 설계, 구현, 테스트를 직접 맡았고 AI 코딩 도구로 개발과 반복 개선 속도를 높였습니다.
 
-### M&M 서버 코어
-[팀 프로젝트, 개발 담당] 모드 75개 환경의 RPG 서버 코어 모드와 내장 웹 관리자 패널
-모드 75개가 들어간 Forge RPG 서버의 중심이 되는 코어 모드입니다.
-경제부터 진영 성장, 퀘스트, 보호 구역까지 서버 운영에 필요한 시스템을 하나로 묶었고, 서버에 웹 관리자 패널을 내장해 브라우저에서 운영할 수 있게 만들었습니다.
-- 지갑, 은행, 수표가 있는 경제 시스템과 동적 가격 상점
-- 플레이어 간 계약 거래
-- 진영 성장 단계와 단계별 콘텐츠 잠금
-- 납품, 처치, 운반 퀘스트와 승급 시험
-- 개인과 팀 보호 구역, 전투 상태 관리
-- 서버 내장 웹 관리자 패널: 경제 통계, 퀘스트 편집, 상점 시세, 월드 규칙, 운영 설정을 브라우저에서 바로 변경
-- 관리자별 계정과 메뉴 단위 권한, 활동 기록
-- 바닐라 화면을 대체하는 자체 UI
-사용 기술: Java, Forge, RPG 서버, 웹 관리자
+### M&M 서버 코어 (MMCore)
+[팀 프로젝트, 단독 개발] 판타지 RPG 서버의 경제, 성장, 콘텐츠, 운영을 하나로 묶은 Forge 코어 모드 단독 개발
+판타지 중세풍 마인크래프트 RPG 서버 M&M의 경제, 성장, 콘텐츠, 운영 시스템을 하나로 묶은 자작 Forge 모드입니다.
+총괄 기획자의 정책 문서 수십 건을 실제 동작으로 옮겼고, 약 1개월 반 동안 0.4부터 0.18까지 버전을 올리며 기획 변경을 바로바로 반영했습니다.
+- 지갑과 은행, 수표, 트랜잭션 ID로 중복 결제를 막는 경제와 서버 전체 통화량 장부
+- 판매량에 따라 시세가 움직이는 공식 상점, 플레이어 간 계약거래와 정기 계약 자동 납부
+- 전용 차원 승급 시험, 규칙 파일로 아이템과 주문, 의식을 단계별로 잠그는 티어 잠금
+- 예약형 보스 던전: 인원별 비용 분담, 투표, 시드 고정 보상 상자
+- Create 열차 연동 철도 승차권, 텔레포트 이용권, 공식 화물 운송
+- 전투 상태 분리, PvP 중 접속 종료 대체 캐릭터, 개인과 팀 보호 구역
+- 웹 관리자 페이지 20여 개: 계정별 권한, 감사 기록, 순환 거래와 다중 계정 같은 의심 행위 기록
+- 서버가 화면 구조를 보내 그리는 범용 UI와 양피지 스타일 커스텀 화면
+사용 기술: Java, Forge 1.20.1, 웹 관리자, 모드 연동
+개발 과정과 문제 해결:
+- 개발 규모: Java 소스 128개 파일, 약 20,000줄. 시스템 20여 개, 관리자 웹 페이지 20여 개, 운영 중 조정하는 설정값 81개.
+- 문제: 환불, 정산, 예외 규칙이 많은 정책 문서 수십 건을 코드로 옮겨야 했고, 아직 정해지지 않은 수치도 많았습니다.
+- 해결: 규칙은 상태 머신과 저장 데이터로 구현하고, 미정 수치는 비워 둔 채 운영 중 웹이나 명령어로 채우는 설정값 시스템으로 분리해 기획 확정을 기다리지 않고 개발했습니다.
+- 문제: 돈과 아이템이 중복 지급되거나 사라지면 서버 경제가 무너집니다.
+- 해결: 모든 거래에 트랜잭션 ID를 붙여 중복 처리를 막고, 보상 상자는 시드를 고정해 다시 열어도 같은 결과가 나오게 했습니다. 부분 수령은 금액을 비례 정산하고 남는 소수 잔액은 마지막 수령 때 몰아서 정산합니다.
+- 문제: API가 없거나 버전마다 다른 마법, 팀 모드와 연동해야 했습니다.
+- 해결: 리플렉션으로 이벤트를 걸어 마법 시전, 의식, 팀 정보를 판정했습니다. 화면은 서버가 구조를 보내는 범용 UI로 만들어 새 기능 대부분을 서버 코드만으로 붙였습니다.
+- 인계: 소스와 기능 문서를 정리해 넘겨 기획자가 이어서 작업할 수 있게 했습니다. 포트폴리오 공개는 서버 측 허락을 받았습니다.
 
 ### TideMarket
 [개인 프로젝트] 수요와 공급에 따라 가격이 움직이는 경제 서버용 상점 플러그인
@@ -228,19 +237,28 @@ Development and problem solving:
 - Fix: Renamed items so the tier and type come first, like "T1 Cloth Armor", and added a search box and a craftable only filter to the crafting screen. Quest target items are highlighted at the top, and an arrow guides players to the target location. Tutorial materials were reduced so the first craft never blocks progress.
 - Role: Led planning, system design, implementation and testing, using AI coding tools to speed up development and iteration.
 
-### M&M Server Core
-[Team project, lead developer] RPG server core mod for a 75-mod setup, with a built-in web admin panel
-The core mod at the center of a Forge RPG server running 75 mods.
-It bundles everything the server needs, from the economy to faction progression, quests and protected zones, and includes a web admin panel built into the server so it can be run from a browser.
-- Economy with wallets, a bank and cheques, plus shops with dynamic prices
-- Contract trading between players
-- Faction progression stages that unlock content step by step
-- Delivery, hunting and transport quests with promotion trials
-- Personal and team protected zones, combat state tracking
-- Built-in web admin panel: economy stats, quest editor, shop prices, world rules and server settings, all changeable from a browser
-- Separate admin accounts with per-menu permissions and an activity log
-- Custom UI that replaces vanilla screens
-Tech: Java, Forge, RPG server, Web admin
+### M&M Server Core (MMCore)
+[Team project, sole developer] Solo-built Forge core mod tying together economy, progression, content and admin for a fantasy RPG server
+A custom Forge mod that bundles the economy, progression, content and admin systems of M&M, a medieval fantasy Minecraft RPG server.
+I turned dozens of policy documents from the lead designer into working systems and shipped versions 0.4 to 0.18 over about six weeks, applying design changes as they came.
+- Wallet, bank and cheques, transaction IDs against double payments, and a server-wide money ledger
+- Official shop with prices that move with sales, player trade contracts and recurring contracts with auto-pay
+- Promotion trials in a private dimension, and tier locks for items, spells and rituals driven by rule files
+- Reservable boss dungeons with split costs, votes and seed-locked reward chests
+- Rail tickets linked to Create trains, teleport passes and official cargo shipping
+- Separate combat states, a stand-in body when logging out in PvP, personal and team claims
+- 20+ web admin pages with per-account permissions, audit logs and flagging of suspicious activity
+- Server-driven generic UI and parchment-style custom screens
+Tech: Java, Forge 1.20.1, Web admin, Mod integration
+Development and problem solving:
+- Scale: 128 Java files, about 20,000 lines. 20+ systems, 20+ admin web pages and 81 settings tuned during live operation.
+- Problem: Dozens of policy documents full of refund, settlement and exception rules had to become code, and many numbers were still undecided.
+- Fix: Rules became state machines with saved data, and undecided numbers were left empty and filled in later from the web panel or commands, so development never waited on design.
+- Problem: Any duplicated or lost money or items would break the server economy.
+- Fix: Every transaction carries an ID to block double processing, reward chests use a fixed seed so reopening gives the same result, and partial claims are settled proportionally with the remainder paid on the last claim.
+- Problem: Some magic and team mods had no API or changed between versions.
+- Fix: Events are hooked through reflection to detect spell casts, rituals and team data. Screens are sent as structure from the server, so most new features need server code only.
+- Handover: Source and feature docs were handed over so the designer can keep working on it. Showing it in my portfolio was approved by the server.
 
 ### TideMarket
 [Personal project] Shop plugin with prices that move with supply and demand
